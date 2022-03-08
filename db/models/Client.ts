@@ -5,6 +5,7 @@ const Client = sequelize.define('Client', {
     id_client: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true
     },
     nom: {
         type: DataTypes.STRING,
@@ -29,12 +30,12 @@ const Client = sequelize.define('Client', {
     },
     ref_facture: {
         type: DataTypes.INTEGER,
-        
     },
 },
     {
         timestamps: false,
     }
 );
+
 
 export default Client;
