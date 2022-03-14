@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
     "@headlessui/react": "^1.5.0",
@@ -21,6 +22,23 @@
     "react-dom": "^17.0.2",
     "styled-components": "^5.3.3",
     "tailwindcss": "^3.0.23"
+=======
+    "@sequelize/core": "^7.0.0-alpha.10",
+    "bcryptjs": "^2.4.3",
+    "js-cookie": "^3.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "next": "12.1.0",
+    "next-connect": "^0.12.2",
+    "nprogress": "^0.2.0",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "postcss-preset-env": "^7.4.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "sequelize": "^6.17.0",
+    "sqlite3": "^5.0.2"
+>>>>>>> 009899f406399948c44c544c50df00f778a2e7e1
   },
   "devDependencies": {
     "@types/node": "17.0.17",

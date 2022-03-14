@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar.js'
 
 
 const Home: NextPage = () => {
+
   return (
     <div className={styles.container}>
       <Head>
