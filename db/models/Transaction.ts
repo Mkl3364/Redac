@@ -5,6 +5,7 @@ const Transaction = sequelize.define('Transaction', {
     id_transaction: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true
     },
     date_transaction: {
         type: DataTypes.DATE,
