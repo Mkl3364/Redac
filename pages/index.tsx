@@ -1,34 +1,22 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-//import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import Navbar from '../components/Navbar.js'
+import ColorPicker from '../components/ColorPicker'
+import { Button } from '@mantine/core';
+import AppCard from '../components/AppCard';
 
 
 const Home: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Projet vente de trotinette</title>
-        <meta name="description" content="trotinette" />
-        <link rel="icon" href=" " />
-      </Head>
-
       <main className={styles.main}>
-      <div>
-        <Navbar/>
-      </div>
 
         <h1 className={styles.title}>
-          Page d&apos;acceuil
+          Home
         </h1>
 
-         <div className={styles.grid}>
-          <a className={styles.card}>
-            
-          </a>
-          </div>
+        <AppCard titre='Trottinette (basic)' description='Simple e-scooter' badge={'ON SALE'} />
+        <AppCard titre='Trottinette (premium)' description='Premium e-scooter' badge={'OUT OF ORDER'} />
 
          {/* <a href=" " className={styles.card}>
             
