@@ -1,7 +1,11 @@
 import React from 'react';
 import Head from 'next/head'
 
-const Header = (props: any) => {
+interface HeaderInterface {
+    titre: String
+}
+
+const Header = (props: HeaderInterface) => {
 
     const {titre} = props;
     
