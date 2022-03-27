@@ -11,7 +11,7 @@ const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight,
 const Edit = () => {
 
     const geometry = new CylinderGeometry(5, 5, 10, 32)
-    const material = new MeshBasicMaterial({color: 0xff0000, wireframe: true})
+    const material = new MeshBasicMaterial({color: 0x00a6ff, wireframe: true})
     const cylinder = new Mesh(geometry, material)
 
     scene.add(cylinder)

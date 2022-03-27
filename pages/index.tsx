@@ -1,11 +1,10 @@
 import type { NextPage } from 'next'
 import styles from '../styles/Home.module.css'
-import ColorPicker from '../components/ColorPicker'
-import { Button } from '@mantine/core';
 import AppCard from '../components/AppCard';
+import { server } from '../config';
 
 
-const Home: NextPage = () => {
+const Home: NextPage = ({item} : any) => {
 
   return (
     <div className={styles.container}>
@@ -15,8 +14,12 @@ const Home: NextPage = () => {
           Home
         </h1>
 
-        <AppCard titre='Trottinette (basic)' description='Simple e-scooter' badge={'ON SALE'} />
-        <AppCard titre='Trottinette (premium)' description='Premium e-scooter' badge={'OUT OF ORDER'} />
+        {
+          item.result.map((e: any) => {
+           return <AppCard key={e.id} id_produit={e.id_produit} titre={e.nom} description={e.description} badge={'ON SALE'} image='/../public/images/troti-basic.jpeg' />
+          })
+        }
+
 
          {/* <a href=" " className={styles.card}>
             
@@ -43,6 +46,18 @@ const Home: NextPage = () => {
       </footer>
     </div>
   )
+}
+
+export const getStaticProps = async() => {
+  const res = await fetch(`${server}/api/item`)
+  const item = await res.json()
+  console.log(item)
+
+  return {
+      props: {
+          item
+      }
+  }
 }
 
 export default Home

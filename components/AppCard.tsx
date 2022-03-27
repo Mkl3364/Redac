@@ -1,16 +1,19 @@
-import { Card, Image, Text, Badge, Button, Group, useMantineTheme } from '@mantine/core';
+import { Card, Text, Badge, Button, Group, useMantineTheme } from '@mantine/core';
 import Link from 'next/link';
+import Image from 'next/image';
 import '../public/images/troti-basic.jpeg'
 
 interface AppCardInterface {
+  id_produit: Number,
   titre: String,
   description: String
-  badge : 'ON SALE' | 'OUT OF ORDER'
+  badge : 'ON SALE' | 'OUT OF ORDER',
+  image: String
 }
 
 export default function AppCard(props: AppCardInterface) {
 
-  const {titre, description, badge} = props;
+  const {titre, description, badge, id_produit, image} = props;
 
   const theme = useMantineTheme();
 
@@ -22,7 +25,7 @@ export default function AppCard(props: AppCardInterface) {
     <div style={{ width: 340, margin: 'auto' }}>
       <Card shadow="sm" p="lg">
         <Card.Section>
-          <Image src="../public/images/troti-basic.jpeg" height={160} alt="Norway" />
+          <Image src={`${image}`} height={160} width={160} alt="troti" />
         </Card.Section>
 
         <Group position="apart" style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
@@ -36,6 +39,11 @@ export default function AppCard(props: AppCardInterface) {
           {description}
         </Text>
 
+        <Button variant="light" color="blue" fullWidth style={{ marginTop: 14 }}>
+        <Link href={`/item/${id_produit}`}>
+           <a>Detail</a>
+        </Link>
+        </Button>
         <Button variant="light" color="blue" fullWidth style={{ marginTop: 14 }}>
         <Link href="/edit">
            <a>Edit</a>
