@@ -19,6 +19,7 @@
     "@mui/icons-material": "^5.5.0",
     "@mui/material": "^5.5.0",
     "@mui/styled-engine-sc": "^5.4.2",
+    "@react-three/fiber": "^7.0.26",
     "@sequelize/core": "^7.0.0-alpha.10",
     "bcryptjs": "^2.4.3",
     "js-cookie": "^3.0.1",
