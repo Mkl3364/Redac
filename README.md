@@ -8,6 +8,8 @@ Ce projet est un site d'e-commerce orienté sur l'achat à travers le jeu (gamif
 
 L'équipe en charge du developpement du projet utilise Jira et le tableau Kaban afin de répartir les tâches et travailler à l'aide des méthodes agiles.
 
+Lancement du projet : `npm run dev`
+
 ### ORM Sequelize
 
 Nous utilisons une base de données relationelle et un ORM (Sequelize) qui nous permet de communiquer avec la base de données de façon plus simple et orienté objet. 
@@ -18,6 +20,12 @@ NOTE : les méthodes sequelize sont des méthodes asynchrones et retournent des 
 
 Afin de retrouver toutes les méthodes utiles :
 [Methodes Sequelize](https://dev.to/projectescape/the-comprehensive-sequelize-cheatsheet-3m1m)
+
+Nous avons en base quatre tables reliées entre-elles grâce à des associations :
+- Clients
+- Colors
+- Produits
+- Transactions
 
 
 ## Equipe de developpement 💻
