@@ -1,56 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
+import { Canvas } from '@react-three/fiber';
+import Box from '../components/Box'
+import Header from '../components/Header';
 import ColorPicker from '../components/ColorPicker';
-import styles from '../styles/Home.module.css'
-import {Scene, WebGL1Renderer, PerspectiveCamera, CylinderGeometry, MeshBasicMaterial, Mesh, ColorRepresentation} from 'three'
-import { Color } from 'react-color-palette';
+import ColorPickerContext from '../context/ColorPickerContext';
+import ColorPickerProvider from '../context/ColorPickerProvider';
 
-const scene = new Scene()
-const renderer = new WebGL1Renderer()
-const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+const edit = () => {
 
-interface EditInterface {
-    color: Color['hex']
-}
-
-const Edit = (props: EditInterface) => {
-
-    const {color} = props;
-
-//    const updateColor = () => {
-//    const newColor = color.slice(1) as unknown as ColorRepresentation
-//    console.log(newColor)
-//        new MeshBasicMaterial({color: newColor});
-//        return newColor;   
-//    }
-//
-//    updateColor()
-
-    useEffect(() => {
-        const geometry = new CylinderGeometry(5, 5, 10, 32)
-        const material = new MeshBasicMaterial({color: 0x00FFF, wireframe: true})
-        const cylinder = new Mesh(geometry, material)
-        scene.add(cylinder)
-        camera.position.z = 20;
-        renderer.setSize(window.innerWidth, window.innerHeight)
-        document.body.appendChild(renderer.domElement)
-
-        const animate = () => {
-            cylinder.rotation.x += 0.01
-            cylinder.rotation.y += 0.01
-    
-            renderer.render(scene, camera);
-            requestAnimationFrame(animate)
-        }
-
-        animate()
-
-    }, [])
+    const color = useContext(ColorPickerContext)
 
     return (
-        <div className={styles.card}>
-        <ColorPicker modal={true}/>
-        </div>
+        <>
+            <Header titre="Site e-commerce | Edition" />
+            <ColorPickerProvider>
+            <div>
+            <ColorPicker />
+            </div>
+            <Canvas style={{ height: '1000px' }}>
+                <ambientLight />
+                <pointLight position={[10, 10, 10]} />
+                <Box position={[-1.2, 0, 0]} />
+                <Box position={[1.2, 0, 0]} />
+            </Canvas>
+            </ColorPickerProvider>
+        </>
     );
+
 };
 
-export default Edit;
+export default edit;
