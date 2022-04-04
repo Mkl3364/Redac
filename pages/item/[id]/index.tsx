@@ -35,7 +35,8 @@ const index = ({ aItem }: any) => {
                     </Link>
                 </Button>
                 <Button color="indigo">
-                    <Link href="/sale">
+                    <Link 
+                    href={`/sales/${aItem.aItem.map((e: any) => e.id_produit)}`}>
                         <a>Acheter</a>
                     </Link>
                 </Button>
