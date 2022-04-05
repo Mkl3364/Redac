@@ -21,6 +21,8 @@
     "@mui/styled-engine-sc": "^5.4.2",
     "@react-three/fiber": "^7.0.26",
     "@sequelize/core": "^7.0.0-alpha.10",
+    "@stripe/stripe-js": "^1.26.0",
+    "axios": "^0.26.1",
     "bcryptjs": "^2.4.3",
     "js-cookie": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
@@ -37,6 +39,7 @@
     "react-modal": "^3.14.4",
     "sequelize": "^6.17.0",
     "sqlite3": "^5.0.2",
+    "stripe": "^8.215.0",
     "styled-components": "^5.3.3",
     "tailwindcss": "^3.0.23",
     "three": "^0.139.0"
