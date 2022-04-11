@@ -2,12 +2,15 @@ import { AppProps } from 'next/app';
 import { MantineProvider } from '@mantine/core';
 import Header from '../components/Header';
 import Layout from '../components/Layouts/Layout';
+import { Provider } from 'react-redux';
+import store from '../state/store';
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
 
   return (
     <>
+    <Provider store={store}>
       <Header titre='Site e-commerce' />
       <Layout>
       <MantineProvider
@@ -28,6 +31,7 @@ export default function App(props: AppProps) {
         <Component {...pageProps} />
       </MantineProvider>
       </Layout>
+      </Provider>
     </>
   );
 }
