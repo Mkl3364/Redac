@@ -177,6 +177,12 @@ const Navbar = () => {
                 <a>Favoris</a>
               </Link>
               </Button>
+
+              <Button>
+              <Link href="/connexion">
+                <a>Connexion</a>
+              </Link>
+              </Button>
             
           </Box>
 
