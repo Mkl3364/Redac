@@ -15,6 +15,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const pages = ['Accueil', 'Produits', 'A Propos' ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -22,6 +23,8 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const router = useRouter()
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -34,7 +37,10 @@ const Navbar = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (e) => {
+    if(e.target.textContent === 'Dashboard') {
+      router.push('/dashboard')
+    }
 
     setAnchorElUser(null);
   };
