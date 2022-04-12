@@ -1,15 +1,40 @@
 import Header from '../../../components/Header';
 import { GetStaticProps } from 'next';
-import React from 'react';
+import React, { useState } from 'react';
 import { server } from '../../../config';
 import { Box, Button } from '@mantine/core'
 import Link from 'next/link';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCart } from '../../../state/AppSlice';
+import { Notification } from '@mantine/core';
+import { Check, X } from 'tabler-icons-react';
 
 const index = ({ aItem }: any) => {
+
+    const dispatch = useDispatch()
+    const [cartBoolean, setCartBoolean] = useState(false)
+
+    const handleAddCart = () => {
+        dispatch(setCart(aItem))
+        setCartBoolean(true)
+    }
 
     return (
         <>
             <Header titre='Site e-commerce | Detail' />
+            {cartBoolean 
+            
+            ? 
+
+                <Notification icon={<Check size={18} />} color="teal" title="Notification">
+                L'article {aItem.aItem.map((e: any) => e.nom)} a été ajouté au panier
+                </Notification>
+            
+            :
+
+            ''
+
+            }
             <div></div>
             <Box
                 sx={(theme) => ({
@@ -39,6 +64,10 @@ const index = ({ aItem }: any) => {
                     href={`/sales/${aItem.aItem.map((e: any) => e.id_produit)}`}>
                         <a>Acheter</a>
                     </Link>
+                </Button>
+
+                <Button color="indigo" onClick={handleAddCart}>
+                        <a>Ajouter au panier</a>
                 </Button>
 
             </Box>
