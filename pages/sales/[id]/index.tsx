@@ -2,19 +2,50 @@ import { Button } from '@mantine/core';
 import axios from 'axios';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { server } from '../../../config';
 import getStripe from '../../../config/getStripe';
 
 const index = ({aItem}: any) => {
 
-    const [product, setProduct] = useState([])
+        const [product, setProduct] = useState('')
+    const [desc, setDesc] = useState('')
 
     useEffect(() => {
-        const values = Object.values(aItem).map((e: any) => e[0].description)
-        console.log('les valeurs', values);
-        console.log(values.map((e: any) => e[0].nom))
+        setProduct(aItem[0].nom)
+        setDesc(aItem[0].description)
+
+
     }, [])
+
+
+
+    console.log(aItem[0].nom, aItem[0].description, aItem[0].prix)
+
+    //useEffect(() => {
+    //    const values = Object.values(aItem).map((e: any) => e[0].description)
+    //    console.log('les valeurs', values);
+    //    console.log(values.map((e: any) => e[0].nom))
+    //}, [])
+
+   // const name =  aItem[0].nom
+    const description = aItem[0].description
+    const price = aItem[0].prix
+
+    const PushParamsToStripeCheckout = async () => {
+
+        //const price = Number(aItem[0].prix)
+
+        await fetch('http://localhost:3000/api/checkout_sessions', {
+            method: "POST",
+            body : JSON.stringify({
+                name: product,
+                description : description,
+                prix: price,
+            })
+        })
+    }
 
     //const redirectToCheckout = async() => {
     //    const {
@@ -31,17 +62,38 @@ const index = ({aItem}: any) => {
 
     return (
         <div>
-            <h1>Acheter {aItem.aItem.map((e: any) => e.nom)}</h1>
-            <h2>{aItem.aItem.map((e: any) => e.description)}</h2>
+            <h1>Acheter </h1>
+            <h2>{aItem[0].nom}</h2>
             <Button color='green'>Ajouter au panier</Button>
             <Link
-                href={`/sales/${aItem.aItem.map((e: any) => e.id_produit)}/quickSale`}>
+                href={`/sales/`}>
             <Button color='cyan' >Paiement rapide</Button>
             </Link>
-            <Link
-                href={`/api/checkout/checkoutSession`}>
-            <Button color='cyan' > Checkout</Button>
-            </Link>
+            <form action="/api/checkout_sessions" method="POST">
+      <section>
+        <button type='submit' onClick={PushParamsToStripeCheckout}>
+          Checkout
+        </button>
+      </section>
+      <style jsx>
+        {`
+          button {
+            height: 36px;
+            background: #556cd6;
+            border-radius: 4px;
+            color: white;
+            border: 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+          }
+          button:hover {
+            opacity: 0.8;
+          }
+        `}
+      </style>
+      </form>
         </div>
     );
 };
@@ -57,9 +109,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const aItem = await res.json()
 
     return {
-        props: {
-            aItem
-        }
+        props: aItem
     }
 }
 
