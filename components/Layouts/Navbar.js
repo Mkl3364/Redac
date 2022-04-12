@@ -35,6 +35,7 @@ const Navbar = () => {
   };
 
   const handleCloseUserMenu = () => {
+
     setAnchorElUser(null);
   };
 
@@ -164,6 +165,24 @@ const Navbar = () => {
                 <a>A propos</a>
               </Link>
               </Button>
+
+              <Button>
+              <Link href="/profil">
+                <a>Profil</a>
+              </Link>
+              </Button>
+
+              <Button>
+              <Link href="/favoris">
+                <a>Favoris</a>
+              </Link>
+              </Button>
+
+              <Button>
+              <Link href="/connexion">
+                <a>Connexion</a>
+              </Link>
+              </Button>
             
           </Box>
 
@@ -171,7 +190,7 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Nom Profil" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
