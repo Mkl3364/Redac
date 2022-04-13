@@ -9,16 +9,36 @@ import Link from 'next/link';
 import { Notification } from '@mantine/core';
 import { Check, X } from 'tabler-icons-react';
 import { setToStorage } from '../../../helpers/localStorage';
+import Image from 'next/image';
+import MinusIcon from '../../../public/images/signe-moins.png';
+import PlusIcon from '../../../public/images/plus.png';
 
 const index = ({ aItem }: any) => {
 
     //const dispatch = useDispatch()
     const [cartBoolean, setCartBoolean] = useState(false)
+    const [quantity, setQuantity] = useState<number>(0);
 
     const handleAddCart = () => {
         //dispatch(setCart(aItem))
         setToStorage('panier1', aItem.aItem.map((e: any) => e.nom))
         setCartBoolean(true)
+    }
+
+    const handleClickMinus = () => {
+        setQuantity(quantity => quantity - 1)
+
+        if(quantity <= 0) {
+            setQuantity(0);
+        }
+    }
+
+    const handleClickPlus = () => {
+        setQuantity(quantity => quantity + 1)
+
+        //if(quantity >= Number(aItem.aItem.map((e: any) => e.stock))) {
+        //    setQuantity(Number(aItem.aItem.map((e: any) => e.stock)))
+        //}
     }
 
     return (
@@ -56,6 +76,14 @@ const index = ({ aItem }: any) => {
             >
                <h1>{aItem.aItem.map((e: any) => e.nom)}</h1>
                 <p>{aItem.aItem.map((desc: any) => desc.description)}</p>
+                <p>{aItem.aItem.map((desc: any) => desc.prix)} euros</p>
+                <Image src={MinusIcon} width={50} height={50} onClick={handleClickMinus}></Image>
+                {quantity}
+                <Image src={PlusIcon} width={50} height={50} onClick={handleClickPlus}></Image>
+
+                <br />
+                <br />
+
                 <Button color="cyan">
                     <Link href='/edit'>
                     <a>Editer</a>
