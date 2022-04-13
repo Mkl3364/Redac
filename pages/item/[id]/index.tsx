@@ -4,18 +4,20 @@ import React, { useState } from 'react';
 import { server } from '../../../config';
 import { Box, Button } from '@mantine/core'
 import Link from 'next/link';
-import { useSelector, useDispatch } from 'react-redux';
-import { setCart } from '../../../state/AppSlice';
+//import { useSelector, useDispatch } from 'react-redux';
+//import { setCart } from '../../../state/AppSlice';
 import { Notification } from '@mantine/core';
 import { Check, X } from 'tabler-icons-react';
+import { setToStorage } from '../../../helpers/localStorage';
 
 const index = ({ aItem }: any) => {
 
-    const dispatch = useDispatch()
+    //const dispatch = useDispatch()
     const [cartBoolean, setCartBoolean] = useState(false)
 
     const handleAddCart = () => {
-        dispatch(setCart(aItem))
+        //dispatch(setCart(aItem))
+        setToStorage('panier1', aItem.aItem.map((e: any) => e.nom))
         setCartBoolean(true)
     }
 

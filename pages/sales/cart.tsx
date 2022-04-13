@@ -1,20 +1,37 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { Button } from '@mantine/core';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+//import { useSelector } from 'react-redux';
+import { deleteFromStorage, getFromStorage } from '../../helpers/localStorage';
 
 const cart = () => {
 
-    const { cart } = useSelector((store: any) => store.app)
+    //const { cart } = useSelector((store: any) => store.app)
+    const [panier, setPanier] = useState<string | null | undefined>('')
+    const router = useRouter()
 
-    console.log(cart.aItem.map((e: any)=>e.nom))
+    //console.log(cart.aItem.map((e: any)=>e.nom))
+
+    useEffect(() => {
+        const panier = getFromStorage('panier1')
+        setPanier(panier)
+        console.log(panier)
+    }, [])
+
+    const handleDeleteFromStorage = () => {
+        deleteFromStorage('panier1')
+    }
+
+    const RedirectToPayment = () => {
+        router.push('/payment')
+    }
 
     return (
         <div>
             <h1>Votre panier</h1>
-            <section>
-                <div>{cart.aItem.map((e: any)=>e.nom)}</div>
-                <div>{cart.aItem.map((e: any)=>e.description)}</div>
-                <div>{cart.aItem.map((e: any)=>e.prix)} euros</div>
-            </section>
+            <p>{panier}</p>
+            <Button color='cyan' onClick={RedirectToPayment}>Acheter</Button>
+            <Button color='cyan' onClick={handleDeleteFromStorage}>Retirer du panier</Button>
         </div>
     );
 };
