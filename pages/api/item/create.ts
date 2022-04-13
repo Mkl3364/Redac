@@ -10,6 +10,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const result = await Produit.create({
             nom: body.name,
             description : body.description,
+            image: body.image,
+            prix: body.prix,
+            stock: body.stock
         })
         res.status(200).json({ result })
         

@@ -8,7 +8,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try{
         const result = await Produit.update({
           nom: body.name,
-          description: body.description
+          description: body.description,
+          image: body.image,
+          prix: body.prix,
+          stock: body.stock
         },
           {
               where: {
