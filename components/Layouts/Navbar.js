@@ -16,6 +16,10 @@ import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import LOGO from '../../public/images/e-scooter.jpg'
+import shoppingCart from '../../public/images/panier.png'
+import { useSelector } from 'react-redux';
 
 const pages = ['Accueil', 'Produits', 'A Propos' ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -23,6 +27,8 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const { user } = useSelector((store) => store.app)
 
   const router = useRouter()
 
@@ -40,6 +46,12 @@ const Navbar = () => {
   const handleCloseUserMenu = (e) => {
     if(e.target.textContent === 'Dashboard') {
       router.push('/dashboard')
+    }
+    if(e.target.textContent === "Profile") {
+      router.push('/profil')
+    }
+    if(e.target.textContent === "Account") {
+      router.push('/auth/account')
     }
 
     setAnchorElUser(null);
@@ -96,7 +108,7 @@ const Navbar = () => {
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
             <Link href="/">
-              <a>LOGO</a>
+              <a><Image src={LOGO} height={40} width={40}></Image></a>
             </Link>
           </Typography>
 
@@ -172,33 +184,40 @@ const Navbar = () => {
               </Link>
               </Button>
 
-              <Button>
-              <Link href="/profil">
-                <a>Profil</a>
-              </Link>
-              </Button>
-
+              { user ?
               <Button>
               <Link href="/favoris">
                 <a>Favoris</a>
               </Link>
               </Button>
+               : 
+               ''
+              }
 
               <Button>
-              <Link href="/connexion">
+              <Link href="/auth/connexion">
                 <a>Connexion</a>
               </Link>
               </Button>
+
+              <Link href='/sales/cart'>
+                <Image src={shoppingCart} height={50} width={50}></Image>
+              </Link>
+
             
           </Box>
 
 
           <Box sx={{ flexGrow: 0 }}>
+            { user ?
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Nom Profil" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Nom Profil" src="" />
               </IconButton>
             </Tooltip>
+            : 
+            ''
+            }
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
