@@ -2,9 +2,14 @@ import type { NextPage } from 'next'
 import styles from '../styles/Home.module.css'
 import AppCard from '../components/AppCard';
 import { server } from '../config';
+import { useEffect } from 'react';
 
 
 const Home: NextPage = ({item} : any) => {
+
+  useEffect(() => {
+    console.log(item)
+  },[])
 
   return (
     <div className={styles.container}>
@@ -16,7 +21,7 @@ const Home: NextPage = ({item} : any) => {
 
         {
           item.result.map((e: any) => {
-           return <AppCard key={e.id} id_produit={e.id_produit} titre={e.nom} description={e.description} badge={'ON SALE'} image='/../public/images/troti-basic.jpeg' />
+           return <AppCard key={e.id} id_produit={e.id_produit} titre={e.nom} description={e.description} badge={'ON SALE'} image={e.image} />
           })
         }
 
