@@ -12,10 +12,11 @@ const cart = () => {
     useEffect(() => {
 
         panier.push(JSON.parse(getFromStorage('panier1')))
+
         setTimeout(() => {
             setLoader(true)
         }, 5000)
-        //console.log('le panier',panier)
+
     }, [])
 
     const handleDeleteFromStorage = () => {
