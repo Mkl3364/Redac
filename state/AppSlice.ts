@@ -4,12 +4,12 @@ export const appSlice = createSlice({
     name: 'appSlice',
     initialState: {
         user: false,
-        cart: [],
+        cart: <any>[],
         loading: true,
     },
     reducers: {
         setCart: (state, action) => {
-            state.cart = action.payload;
+            state.cart = [...state.cart, action.payload]
         },
         setUser: (state, action) => {
             state.user = action.payload

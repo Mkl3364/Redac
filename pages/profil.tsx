@@ -4,7 +4,6 @@ import { auth, db, logout } from "../config/firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { Button } from "@mantine/core";
-import { handleBreakpoints } from "@mui/system";
 import { useDispatch } from "react-redux";
 import { setUser } from "../state/AppSlice";
 

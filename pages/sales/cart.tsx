@@ -1,21 +1,21 @@
 import { Button } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-//import { useSelector } from 'react-redux';
-import { deleteFromStorage, getFromStorage } from '../../helpers/localStorage';
+import { deleteFromStorage, getFromStorage, setToStorage } from '../../helpers/localStorage';
 
 const cart = () => {
 
-    //const { cart } = useSelector((store: any) => store.app)
-    const [panier, setPanier] = useState<string | null | undefined>('')
+    const [panier, setPanier] = useState<any[]>([])
+    const [loader, setLoader] = useState<boolean>(false);
     const router = useRouter()
 
-    //console.log(cart.aItem.map((e: any)=>e.nom))
-
     useEffect(() => {
-        const panier = getFromStorage('panier1')
-        setPanier(panier)
-        console.log(panier)
+
+        panier.push(JSON.parse(getFromStorage('panier1')))
+        setTimeout(() => {
+            setLoader(true)
+        }, 5000)
+        //console.log('le panier',panier)
     }, [])
 
     const handleDeleteFromStorage = () => {
@@ -27,11 +27,31 @@ const cart = () => {
     }
 
     return (
+        
         <div>
+        {   loader ?
+
+            <>
             <h1>Votre panier</h1>
-            <p>{panier}</p>
+
+            <h3>Produit 1</h3>
+            <p> Nom : {panier[0][0][0].nom}</p>
+            <p>Description : {panier[0][0][0].description}</p>
+
+
+            <h3>Produit 2</h3>
+            <p> Nom : {panier[0][1][0].nom}</p>
+            <p>Description : {panier[0][1][0].description}</p>
+            
             <Button color='cyan' onClick={RedirectToPayment}>Acheter</Button>
             <Button color='cyan' onClick={handleDeleteFromStorage}>Retirer du panier</Button>
+            </>
+        
+
+            :
+
+            'Loading...'
+        }
         </div>
     );
 };

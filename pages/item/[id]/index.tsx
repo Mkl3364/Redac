@@ -4,26 +4,30 @@ import React, { useState } from 'react';
 import { server } from '../../../config';
 import { Box, Button } from '@mantine/core'
 import Link from 'next/link';
-//import { useSelector, useDispatch } from 'react-redux';
-//import { setCart } from '../../../state/AppSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCart } from '../../../state/AppSlice';
 import { Notification } from '@mantine/core';
-import { Check, X } from 'tabler-icons-react';
+import { Check } from 'tabler-icons-react';
 import { setToStorage } from '../../../helpers/localStorage';
 import Image from 'next/image';
 import MinusIcon from '../../../public/images/signe-moins.png';
 import PlusIcon from '../../../public/images/plus.png';
+import ImageBackup from '../../../public/images/e-scooter.jpg';
 
 const index = ({ aItem }: any) => {
 
-    //const dispatch = useDispatch()
+    const { cart } = useSelector((store: any) => store.app)
+    const dispatch = useDispatch()
     const [cartBoolean, setCartBoolean] = useState(false)
     const [quantity, setQuantity] = useState<number>(0);
 
     const handleAddCart = () => {
-        //dispatch(setCart(aItem))
-        setToStorage('panier1', aItem.aItem.map((e: any) => e.nom))
+        dispatch(setCart(aItem.aItem.map((e: any) => e)))
+        setToStorage('panier1', JSON.stringify(cart))
         setCartBoolean(true)
     }
+
+    //console.log("l'object", aItem)
 
     const handleClickMinus = () => {
         setQuantity(quantity => quantity - 1)
@@ -75,6 +79,7 @@ const index = ({ aItem }: any) => {
                 })}
             >
                <h1>{aItem.aItem.map((e: any) => e.nom)}</h1>
+               <Image src={`${aItem.aItem.map((e: any) => e.image)}` || ImageBackup } height={500} width={500}/>
                 <p>{aItem.aItem.map((desc: any) => desc.description)}</p>
                 <p>{aItem.aItem.map((desc: any) => desc.prix)} euros</p>
                 <Image src={MinusIcon} width={50} height={50} onClick={handleClickMinus}></Image>
