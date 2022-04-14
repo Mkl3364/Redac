@@ -8,7 +8,13 @@ Ce projet est un site d'e-commerce orienté sur l'achat à travers le jeu (gamif
 
 L'équipe en charge du developpement du projet utilise Jira et le tableau Kaban afin de répartir les tâches et travailler à l'aide des méthodes agiles.
 
+Afin de lancer le projet un exemple de fichier `.env.sample` est disponible dans le repo. Il suffit simplement d'utiliser `CREATE DATABASE <nom de la base>` et indiquer ensuite dans le fichier `.env` les informations de la base.
+
+Une fois la base instancié, rendez-vous sur la route `localhost:3000/sync` afin de synchroniser les tables nécéssaires au projet.
+
 Lancement du projet : `npm run dev`
+
+## Technologies utilisées
 
 ### ORM Sequelize
 
@@ -27,6 +33,19 @@ Nous avons en base quatre tables reliées entre-elles grâce à des associations
 - Produits
 - Transactions
 
+## Firebase Auth
+
+Pour gérer l'authentification nous utilisons la module d'authentification fourni par Firebase. Il est possible de se connecté à partir d'un e-mail et mot de passe mais aussi de son compte Google.
+
+## Stripe
+
+Stripe est utilisé afin de proposer une fonction de paiement à l'utilisateur. Le client est redirigé vers une page généré par Stripe.
+
+## ThreeJS
+
+Three Js est un module 3D qui nous permet de créer du contenu 3D dans une application web. Nous utilisons react-three-fiber qui permet d'intégrer threeJS dans une application React.
+
+Enfin, nous utilisons le local Storage pour stocker et gerer le panier utilisateur afin qu'il persiste.
 
 ## Equipe de developpement 💻
 
