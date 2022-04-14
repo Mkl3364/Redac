@@ -17,8 +17,7 @@ const edit = () => {
 
     const handleClickAddBox = () => {
         setBoxState(!boxState);
-    }
-    //   
+    } 
 
     return (
         <>

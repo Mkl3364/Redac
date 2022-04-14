@@ -22,7 +22,11 @@ const index = ({ aItem }: any) => {
     const [quantity, setQuantity] = useState<number>(0);
 
     const handleAddCart = () => {
+
+        //let finalObject = Object.assign({...aItem.aItem[0], quantity})
+        //console.log("final object", finalObject)
         dispatch(setCart(aItem.aItem.map((e: any) => e)))
+        //dispatch(setCart(finalObject))
         setToStorage('panier1', JSON.stringify(cart))
         setCartBoolean(true)
     }
