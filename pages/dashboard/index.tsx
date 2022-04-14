@@ -1,5 +1,8 @@
 import React, { useState, MouseEvent, FormEvent, ChangeEventHandler } from 'react';
+import Header from '../../components/Header';
 import { server } from '../../config';
+import { Notification } from '@mantine/core';
+import { Check } from 'tabler-icons-react';
 
 const Dashboard = (props: any) => {
 
@@ -11,6 +14,9 @@ const Dashboard = (props: any) => {
     const [productImage, setProductImage] = useState<string>('')
     const [productPrice, setProductPrice] = useState<string>('')
     const [productStock, setProductStock] = useState<string>('')
+    const [createBoolean, setCreateBoolean] = useState<boolean>(false)
+    const [modifyBoolean, setModifyBoolean] = useState<boolean>(false)
+    const [deleteBoolean, setDeleteBoolean] = useState<boolean>(false)
 
     const handleNameChange = (e: React.FormEvent<HTMLInputElement>) => {
         setProductName(e.currentTarget.value)
@@ -51,6 +57,7 @@ const Dashboard = (props: any) => {
                 stock: Number(productStock)
             })
         })
+        setCreateBoolean(true);
     }
 
     const submitModifyForm = async() => {
@@ -65,6 +72,7 @@ const Dashboard = (props: any) => {
                 id: currentID
             })
         })
+        setModifyBoolean(true)
     }
 
     const submitDeleteForm = async() => {
@@ -74,10 +82,27 @@ const Dashboard = (props: any) => {
                 id: currentID
             })
         })
+        setDeleteBoolean(true)
     }
 
     return (
         <div>
+
+            <Header titre={'Dashboard'} />
+
+            {createBoolean || modifyBoolean || deleteBoolean 
+            
+            ? 
+
+                <Notification icon={<Check size={18} />} color="teal" title="Notification">
+                Opération réussie !
+                </Notification>
+            
+            :
+
+            ''
+
+            }
             <section>
                 <h1>Dashboard administrateur</h1>
             </section>
@@ -87,11 +112,11 @@ const Dashboard = (props: any) => {
                 <form action="" method="get">
                     <div >
                         <label >Enter your name: </label>
-                        <input type="text" name="name" id="name" required onChange={handleNameChange} />
+                        <input type="text" name="name" id="name" onChange={handleNameChange} />
                     </div>
                     <div >
                         <label>Enter your description: </label>
-                        <input type="email" name="email" id="email" required onChange={handleDescChange} />
+                        <input type="description" name="description" id="description" onChange={handleDescChange} />
                     </div>
                     <div >
                         <label>Enter a price: </label>
@@ -121,11 +146,11 @@ const Dashboard = (props: any) => {
                     </select>
                         <div >
                             <label >Enter a new name : </label>
-                            <input type="text" name="name" id="name" required onChange={handleNameChange} />
+                            <input type="text" name="name" id="name" onChange={handleNameChange} />
                         </div>
                         <div >
                             <label>Enter a new description: </label>
-                            <input type="email" name="email" id="email" required onChange={handleDescChange} />
+                            <input type="text" name="text" id="text" onChange={handleDescChange} />
                         </div>
                         <div >
                         <label>Enter a new price: </label>
@@ -137,7 +162,7 @@ const Dashboard = (props: any) => {
                     </div>
                         <div >
                             <label>Enter a image URL: </label>
-                            <input name="image" id="image" required onChange={handleImgChange} />
+                            <input name="image" id="image" onChange={handleImgChange} />
                         </div>
                         <div >
                             <button onClick={submitModifyForm}>Modifier le produit</button>
