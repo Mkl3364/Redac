@@ -11,13 +11,21 @@ const cart = () => {
 
     useEffect(() => {
 
+        const test = JSON.parse(getFromStorage('panier1'))
+        console.log("l'objet test ", test)
         panier.push(JSON.parse(getFromStorage('panier1')))
+
+        console.log('le panier', panier)
 
         setTimeout(() => {
             setLoader(true)
         }, 5000)
 
     }, [])
+
+    //if(panier === null) {
+    //    return "Il n'y a rien dans le panier";
+    //}
 
     const handleDeleteFromStorage = () => {
         deleteFromStorage('panier1')
@@ -36,13 +44,14 @@ const cart = () => {
             <h1>Votre panier</h1>
 
             <h3>Produit 1</h3>
-            <p> Nom : {panier[0][0][0].nom}</p>
-            <p>Description : {panier[0][0][0].description}</p>
+            <p> Nom : {panier[0][0].nom}</p>
+            <p>Description : {panier[0][0].description}</p>
+            <p>Quantité : {panier[0][0].quantity}</p>
 
 
             <h3>Produit 2</h3>
-            <p> Nom : {panier[0][1][0].nom}</p>
-            <p>Description : {panier[0][1][0].description}</p>
+            <p> Nom : {panier[0][1].nom}</p>
+            <p>Description : {panier[0][1].description}</p>
             
             <Button color='cyan' onClick={RedirectToPayment}>Acheter</Button>
             <Button color='cyan' onClick={handleDeleteFromStorage}>Retirer du panier</Button>

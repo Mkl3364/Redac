@@ -23,10 +23,14 @@ const index = ({ aItem }: any) => {
 
     const handleAddCart = () => {
 
-        //let finalObject = Object.assign({...aItem.aItem[0], quantity})
-        //console.log("final object", finalObject)
-        dispatch(setCart(aItem.aItem.map((e: any) => e)))
-        //dispatch(setCart(finalObject))
+        let finalObject = Object.assign({...aItem.aItem[0], quantity})
+        console.log("final object", finalObject)
+        //const entries = Object.keys(finalObject).map(i => finalObject[i])
+        //console.log(entries)
+        console.log('aItem', aItem.aItem.map((e: any) => e))
+        //dispatch(setCart(aItem.aItem.map((e: any) => e)))
+        dispatch(setCart(finalObject))
+        //console.log('le panie en context', cart)
         setToStorage('panier1', JSON.stringify(cart))
         setCartBoolean(true)
     }
