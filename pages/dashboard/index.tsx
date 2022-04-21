@@ -11,7 +11,7 @@ const Dashboard = (props: any) => {
     const [productName, setProductName] = useState<string>('')
     const [productDesc, setProductDesc] = useState<string>('')
     const [currentID, setCurrentID] = useState<number>(0)
-    const [productImage, setProductImage] = useState<string>('')
+    const [productImage, setProductImage] = useState<File | string>()
     const [productPrice, setProductPrice] = useState<string>('')
     const [productStock, setProductStock] = useState<string>('')
     const [createBoolean, setCreateBoolean] = useState<boolean>(false)
@@ -33,9 +33,34 @@ const Dashboard = (props: any) => {
         console.log(currentID)
     }
 
-    const handleImgChange = (e: React.FormEvent<HTMLInputElement>) => {
-        setProductImage(e.currentTarget.value)
-        console.log(productImage)
+    const convertImageToBase64 = (file: File) => new Promise((resolve, reject) => {
+        let reader = new FileReader();
+        reader.readAsDataURL(file)
+        reader.onload = () => {
+            if(typeof reader.result === "string") {
+                resolve(reader.result.replace(/^.+?;base64,/, ""));
+            }
+            if(typeof reader.result === null) {
+                throw new Error('Aucun fichier en mémoire')
+            }
+        }
+        
+        reader.onerror = (error) => reject(error);
+    })
+
+
+    const handleImgChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        const convertedBase64Image = await convertImageToBase64(e.target.files![0])
+
+        const response = await fetch('/api/imgur/upload', {
+            method: "POST",
+            body: JSON.stringify({
+                image: convertedBase64Image
+            }),
+        })
+        //setProductImage(await convertImageToBase64(e.target.files![0]))
+        console.log(response)
     }
 
     const handlePriceChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -127,8 +152,10 @@ const Dashboard = (props: any) => {
                         <input name="stock" id="stock" onChange={handleStockChange} />
                     </div>
                     <div >
+                        <form>
                         <label>Enter a image URL: </label>
-                        <input name="image" id="image" onChange={handleImgChange} />
+                        <input type="file" name="image" id="image" onChange={handleImgChange} />
+                        </form>
                     </div>
                     <div >
                         <input type="submit" value="Ajouter le produit" onClick={submitCreateForm} />
