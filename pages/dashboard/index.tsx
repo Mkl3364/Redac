@@ -59,8 +59,10 @@ const Dashboard = (props: any) => {
                 image: convertedBase64Image
             }),
         })
-        //setProductImage(await convertImageToBase64(e.target.files![0]))
         console.log(response)
+        const link = await response.json()
+        setProductImage(link.data.link)
+        console.log(link.data.link)
     }
 
     const handlePriceChange = (e: React.FormEvent<HTMLInputElement>) => {

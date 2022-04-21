@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         //res.status(200).send({reponse})
         //const bod = data('imageUrl', dataToSend);
         const response = await axios.post('https://api.imgur.com/3/image',  bod, { headers: {'Authorization' : 'Client-ID 653f3b8792a5aab' }})
-        res.status(200).send(response.data.data['link'])
+        res.status(200).json(response.data)
 
 
         //const response = await client.upload({
