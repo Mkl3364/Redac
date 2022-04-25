@@ -22,7 +22,7 @@ export default function AppCard(props: AppCardInterface) {
     : theme.colors.gray[7];
 
   return (
-    <div style={{ width: 340, margin: 'auto' }}>
+    <div style={{ width: 340, margin: 'auto'}}>
       <Card shadow="sm" p="lg">
         <Card.Section>
           <Image src={`${image}` || ImageBackup} height={160} width={160} alt="troti" />

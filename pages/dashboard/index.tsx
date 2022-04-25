@@ -189,10 +189,12 @@ const Dashboard = (props: any) => {
                         <label>Enter a new stock: </label>
                         <input name="stock" id="stock" onChange={handleStockChange} />
                     </div>
-                        <div >
-                            <label>Enter a image URL: </label>
-                            <input name="image" id="image" onChange={handleImgChange} />
-                        </div>
+                    <div >
+                        <form>
+                        <label>Enter a image URL: </label>
+                        <input type="file" name="image" id="image" onChange={handleImgChange} />
+                        </form>
+                    </div>
                         <div >
                             <button onClick={submitModifyForm}>Modifier le produit</button>
                         </div>

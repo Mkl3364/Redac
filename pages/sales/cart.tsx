@@ -21,7 +21,7 @@ const cart = () => {
             setLoader(true)
         }, 5000)
 
-    }, [])
+    }, [panier])
 
     //if(panier === null) {
     //    return "Il n'y a rien dans le panier";
@@ -29,6 +29,8 @@ const cart = () => {
 
     const handleDeleteFromStorage = () => {
         deleteFromStorage('panier1')
+        panier.splice(0, panier.length);
+        window.location.reload()
     }
 
     const RedirectToPayment = () => {
@@ -38,20 +40,19 @@ const cart = () => {
     return (
         
         <div>
-        {   loader ?
+        {   loader && panier[0] !== null ?
 
             <>
             <h1>Votre panier</h1>
 
-            <h3>Produit 1</h3>
-            <p> Nom : {panier[0][0].nom}</p>
-            <p>Description : {panier[0][0].description}</p>
-            <p>Quantité : {panier[0][0].quantity}</p>
-
-
-            <h3>Produit 2</h3>
-            <p> Nom : {panier[0][1].nom}</p>
-            <p>Description : {panier[0][1].description}</p>
+            {panier[0].map((element: any) => {
+                return (
+                    <>
+                    <p>Nom : {element.nom}</p>
+                    <p>Quantitié : {element.quantity}</p>
+                    </>
+                )
+            })}
             
             <Button color='cyan' onClick={RedirectToPayment}>Acheter</Button>
             <Button color='cyan' onClick={handleDeleteFromStorage}>Retirer du panier</Button>
@@ -60,7 +61,7 @@ const cart = () => {
 
             :
 
-            'Loading...'
+            <h2>Il n'y a rien dans le panier</h2>
         }
         </div>
     );

@@ -37,8 +37,9 @@ const index = ({aItem}: any) => {
 
         //const price = Number(aItem[0].prix)
 
-        await fetch('http://localhost:3000/api/checkout_sessions', {
+        await fetch('/api/checkout_sessions', {
             method: "POST",
+            headers: {'Content-type': 'application/json', 'Authorization' : `Bearer pk_test_51KmBobKZq74SdZP81vhKSxJGDhPc2UEv1d2SBCu1IJf3WDkc4ZSJENLjFC04YFIA32bs4MBG6Sd8gkQuGR4XynoT00UHNoA9hn`},
             body : JSON.stringify({
                 name: product,
                 description : description,
@@ -64,7 +65,6 @@ const index = ({aItem}: any) => {
         <div>
             <h1>Acheter </h1>
             <h2>{aItem[0].nom}</h2>
-            <Button color='green'>Ajouter au panier</Button>
             <Link
                 href={`/sales/`}>
             <Button color='cyan' >Paiement rapide</Button>

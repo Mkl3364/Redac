@@ -5,7 +5,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY!)
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-    //const body = JSON.parse(req.body);
+    const body = JSON.parse(req.body);
 
         try {
             const session = await stripe.checkout.sessions.create({
@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                                 "description" : req.body.description,
                                 "images" : [],
                             },
-                            "unit_amount_decimal" : 1200,
+                            "unit_amount_decimal" : req.body.prix,
                             
                         },
                         quantity: 1,
