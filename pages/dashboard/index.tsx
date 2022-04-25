@@ -17,6 +17,7 @@ const Dashboard = (props: any) => {
     const [createBoolean, setCreateBoolean] = useState<boolean>(false)
     const [modifyBoolean, setModifyBoolean] = useState<boolean>(false)
     const [deleteBoolean, setDeleteBoolean] = useState<boolean>(false)
+    const [priceId, setPriceId] = useState<string>('')
 
     const handleNameChange = (e: React.FormEvent<HTMLInputElement>) => {
         setProductName(e.currentTarget.value)
@@ -63,6 +64,18 @@ const Dashboard = (props: any) => {
         const link = await response.json()
         setProductImage(link.data.link)
         console.log(link.data.link)
+
+
+        const result = await fetch('/api/stripe/create_price', {
+            method: "POST",
+            body: JSON.stringify({
+                name: productName,
+                prix: Number(productPrice),
+            })
+        })
+        const reponse = await result.json()
+        setPriceId(reponse.id)
+        console.log(reponse.id)
     }
 
     const handlePriceChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -74,12 +87,14 @@ const Dashboard = (props: any) => {
     } 
 
     const submitCreateForm = async () => {
+
         await fetch('/api/item/create', {
             method: "POST",
             body: JSON.stringify({
                 name: productName,
                 description: productDesc,
                 image: productImage,
+                price_id: priceId,
                 prix: Number(productPrice),
                 stock: Number(productStock)
             })
@@ -160,7 +175,7 @@ const Dashboard = (props: any) => {
                         </form>
                     </div>
                     <div >
-                    <button onClick={submitCreateForm}>Modifier le produit</button>
+                    <button onClick={submitCreateForm}>Creer le produit</button>
                     </div>
                 
 

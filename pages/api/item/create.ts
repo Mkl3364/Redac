@@ -14,6 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             description : body.description,
             image: body.image,
             prix: body.prix,
+            price_id: body.price_id,
             stock: body.stock
         })
         res.status(200).json({ result })
