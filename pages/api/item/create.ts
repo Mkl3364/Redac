@@ -6,6 +6,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const body = JSON.parse(req.body)
 
+    if(req.method === 'POST') {
+
     try {
         const result = await Produit.create({
             nom: body.name,
@@ -20,4 +22,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     catch (error) {
         throw new Error("Impossible d'ajouter un article");
     }
+
+}
 }

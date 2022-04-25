@@ -136,7 +136,7 @@ const Dashboard = (props: any) => {
 
             <section>
                 <h2>Ajout d'un produit</h2>
-                <form action="" method="get">
+            
                     <div >
                         <label >Enter your name: </label>
                         <input type="text" name="name" id="name" onChange={handleNameChange} />
@@ -160,9 +160,9 @@ const Dashboard = (props: any) => {
                         </form>
                     </div>
                     <div >
-                        <input type="submit" value="Ajouter le produit" onClick={submitCreateForm} />
+                    <button onClick={submitCreateForm}>Modifier le produit</button>
                     </div>
-                </form>
+                
 
                 <section>
                     <h2>Modifier un produit</h2>

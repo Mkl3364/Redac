@@ -12,21 +12,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const body = JSON.parse(req.body)
 
+    const bod = {
+        image: body.image
+    }
+
     
 
     //const client = new ImgurClient({clientId: process.env.IMGUR_CLIENT_ID})
 
     try {
-        const bod = {
-            image: body.image
-        }
         //const reponse = await uploadImage(dataToSend);
         //res.status(200).send({reponse})
         //const bod = data('imageUrl', dataToSend);
         const response = await axios.post('https://api.imgur.com/3/image',  bod, { headers: {'Authorization' : 'Client-ID 653f3b8792a5aab' }})
         res.status(200).json(response.data)
-
-
         //const response = await client.upload({
         //    image: dataToSend
         //})
