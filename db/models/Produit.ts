@@ -22,6 +22,9 @@ const Produit = sequelize.define('Produit', {
     image: {
         type: DataTypes.STRING,
     },
+    price_id : {
+        type: DataTypes.STRING,
+    },
     ref_categorie: {
         type: DataTypes.INTEGER,
     },

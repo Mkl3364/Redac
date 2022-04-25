@@ -1,56 +1,55 @@
-import React, { useEffect } from 'react';
-import ColorPicker from '../components/ColorPicker';
-import styles from '../styles/Home.module.css'
-import {Scene, WebGL1Renderer, PerspectiveCamera, CylinderGeometry, MeshBasicMaterial, Mesh, ColorRepresentation} from 'three'
-import { Color } from 'react-color-palette';
+import React, { useState } from 'react';
+import { Canvas, extend, Object3DNode } from '@react-three/fiber';
+import Box from '../components/3D/Box'
+import Header from '../components/Header';
+import { Button } from '@mantine/core';
+import { ColorPicker, useColor } from "react-color-palette";
+import "react-color-palette/lib/css/styles.css";
+import Cylinder from '../components/3D/Cylinder';
+import { OrbitControls, TransformControls } from 'three-stdlib'
+import CameraControls from '../components/3D/CameraControls';
+extend({ OrbitControls, TransformControls })
 
-const scene = new Scene()
-const renderer = new WebGL1Renderer()
-const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+const edit = () => {
 
-interface EditInterface {
-    color: Color['hex']
-}
+    const [boxState, setBoxState] = useState<boolean>(false)
+    const [color, setColor] = useColor("hex", "#121212")
 
-const Edit = (props: EditInterface) => {
-
-    const {color} = props;
-
-//    const updateColor = () => {
-//    const newColor = color.slice(1) as unknown as ColorRepresentation
-//    console.log(newColor)
-//        new MeshBasicMaterial({color: newColor});
-//        return newColor;   
-//    }
-//
-//    updateColor()
-
-    useEffect(() => {
-        const geometry = new CylinderGeometry(5, 5, 10, 32)
-        const material = new MeshBasicMaterial({color: 0x00FFF, wireframe: true})
-        const cylinder = new Mesh(geometry, material)
-        scene.add(cylinder)
-        camera.position.z = 20;
-        renderer.setSize(window.innerWidth, window.innerHeight)
-        document.body.appendChild(renderer.domElement)
-
-        const animate = () => {
-            cylinder.rotation.x += 0.01
-            cylinder.rotation.y += 0.01
-    
-            renderer.render(scene, camera);
-            requestAnimationFrame(animate)
-        }
-
-        animate()
-
-    }, [])
+    const handleClickAddBox = () => {
+        setBoxState(!boxState);
+    } 
 
     return (
-        <div className={styles.card}>
-        <ColorPicker modal={true}/>
-        </div>
+        <>
+            <Header titre="Site e-commerce | Edition" />
+            <div>
+            <ColorPicker width={256} height={98} color={color} onChange={setColor} hideHSV dark />
+            <Button variant="light" color="blue" onClick={handleClickAddBox}> Ajoute un composant </Button>
+            </div>
+            <Canvas style={{ height: '500px' }}>
+                <ambientLight />
+                <pointLight position={[10, 10, 10]} />
+                <CameraControls />
+                <Box position={[0, 0, 0]} color={color.hex}/>
+                <Cylinder position={[-3.9, 0, 0]}/>
+                {boxState ? <Box position={[3.9, 0, 0]} color={color.hex}/> : '' }
+            </Canvas>
+        </>
     );
+
 };
 
-export default Edit;
+export default edit;
+
+class CustomElement extends OrbitControls {}
+extend({CustomElement})
+
+declare global {
+    namespace JSX {
+        interface IntrinsicElements {
+            orbitControls : Object3DNode<CustomElement, typeof CustomElement>
+        }
+    }
+}
+
+;<orbitControls />
