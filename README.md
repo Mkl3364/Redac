@@ -37,9 +37,9 @@ Nous avons en base quatre tables reliées entre-elles grâce à des associations
 
 Pour gérer l'authentification nous utilisons la module d'authentification fourni par Firebase. Il est possible de se connecté à partir d'un e-mail et mot de passe mais aussi de son compte Google.
 
-## Stripe
+## PayPal API
 
-Stripe est utilisé afin de proposer une fonction de paiement à l'utilisateur. Le client est redirigé vers une page généré par Stripe.
+PayPayAPI est utilisé afin de proposer une fonction de paiement à l'utilisateur. Le client est redirigé vers une page généré par Paypal.
 
 ## ThreeJS
 
