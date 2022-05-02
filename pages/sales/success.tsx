@@ -8,7 +8,7 @@ const success = () => {
         <div>
             <Header titre='Payment success'/>
             <h1>Succès ! Merci pour votre paiement</h1>
-            <Link href='/'><Button color='cyan'>Revenir à la page d'accueil</Button></Link>
+            <Link href='/'><Button color='cyan'>Revenir à la page d`&apos;accueil</Button></Link>
         </div>
     );
 };
