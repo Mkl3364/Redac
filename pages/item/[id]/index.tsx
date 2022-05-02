@@ -15,7 +15,7 @@ import PlusIcon from '../../../public/images/plus.png';
 import ImageBackup from '../../../public/images/e-scooter.jpg';
 import PaypalButton from '../../../components/PayPal/PaypalButton';
 
-const index = ({ aItem }: any) => {
+const Index = ({ aItem }: any) => {
 
     const { cart } = useSelector((store: any) => store.app)
     const dispatch = useDispatch()
@@ -176,4 +176,4 @@ export const getStaticPaths = async () => {
     }
 }
 
-export default index;
+export default Index;

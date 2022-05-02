@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { deleteFromStorage, getFromStorage, setToStorage } from '../../helpers/localStorage';
 
-const cart = () => {
+const Cart = () => {
 
     const [panier, setPanier] = useState<any[]>([])
     const [loader, setLoader] = useState<boolean>(false);
@@ -67,4 +67,4 @@ const cart = () => {
     );
 };
 
-export default cart;
+export default Cart;

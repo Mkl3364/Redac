@@ -8,7 +8,7 @@ import React, { useState, useEffect } from 'react';
 import { server } from '../../../config';
 import getStripe from '../../../config/getStripe';
 
-const index = ({ aItem }: any) => {
+const Index = ({ aItem }: any) => {
 
   const [product, setProduct] = useState('')
   const [desc, setDesc] = useState('')
@@ -113,4 +113,4 @@ export const getStaticPaths = async () => {
   }
 }
 
-export default index;
+export default Index;

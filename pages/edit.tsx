@@ -10,7 +10,7 @@ import { OrbitControls, TransformControls } from 'three-stdlib'
 import CameraControls from '../components/3D/CameraControls';
 extend({ OrbitControls, TransformControls })
 
-const edit = () => {
+const Edit = () => {
 
     const [boxState, setBoxState] = useState<boolean>(false)
     const [color, setColor] = useColor("hex", "#121212")
@@ -39,7 +39,7 @@ const edit = () => {
 
 };
 
-export default edit;
+export default Edit;
 
 class CustomElement extends OrbitControls {}
 extend({CustomElement})
