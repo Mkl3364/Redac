@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 //TODO
 // Récuperer les infos utilisateurs de firebase et les modifier depuis l'app
 
-const account = () => {
+const Account = () => {
 
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState('')
@@ -64,4 +64,4 @@ const account = () => {
     );
 };
 
-export default account;
+export default Account;

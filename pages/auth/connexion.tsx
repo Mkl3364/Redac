@@ -19,7 +19,7 @@ const PageConnexion = () => {
   useEffect(() => {
     if(user) {
       dispatch(setUser(true))
-      router.push('/');
+      //router.push("/");
     }
   }, [user, loading])
 
@@ -79,7 +79,6 @@ const PageConnexion = () => {
           <div>
             <Link href="/auth/reset">Mot de passe oublié ?</Link>
           </div>
-
           <div>
             Pas encore de compte ? <Link href="/register">S'enregistrer</Link>
           </div>
