@@ -47,6 +47,10 @@ Three Js est un module 3D qui nous permet de créer du contenu 3D dans une appli
 
 Enfin, nous utilisons le local Storage pour stocker et gerer le panier utilisateur afin qu'il persiste.
 
+## Deploiement avec Vecel
+
+Nous deployons le site avec Vercel à l'adresse suivante : https://redac-m6g1nmyat-mkl3364.vercel.app/
+
 ## Equipe de developpement 💻
 
 BOZON Loïc - Bachelor 3 Developpement web 
