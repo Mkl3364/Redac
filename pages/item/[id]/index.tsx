@@ -13,6 +13,7 @@ import Image from 'next/image';
 import MinusIcon from '../../../public/images/signe-moins.png';
 import PlusIcon from '../../../public/images/plus.png';
 import ImageBackup from '../../../public/images/e-scooter.jpg';
+import PaypalButton from '../../../components/PayPal/PaypalButton';
 
 const index = ({ aItem }: any) => {
 
@@ -20,6 +21,7 @@ const index = ({ aItem }: any) => {
     const dispatch = useDispatch()
     const [cartBoolean, setCartBoolean] = useState(false)
     const [quantity, setQuantity] = useState<number>(0);
+    const [orderID, setOrderID] = useState('')
 
     const handleAddCart = () => {
 
@@ -51,6 +53,28 @@ const index = ({ aItem }: any) => {
         //if(quantity >= Number(aItem.aItem.map((e: any) => e.stock))) {
         //    setQuantity(Number(aItem.aItem.map((e: any) => e.stock)))
         //}
+    }
+
+    const handleCreateOrder = async() => {
+        const response = await fetch('/api/paypal/createOrder', {
+            method: 'POST',
+        });
+        //console.log(response)
+        const dataa = await response.json();
+        console.log(dataa)
+        //setOrderID(dataa.id)
+        return dataa.id
+    }
+
+    const handleCapturePayment = async() => {
+        const id = await handleCreateOrder()
+        console.log(id)
+        const response = await fetch(`/api/paypal/capture/${id}`, {
+            method: 'POST',
+        })
+        const data = await response.json()
+        console.log(data)
+        return data
     }
 
     return (
@@ -112,6 +136,8 @@ const index = ({ aItem }: any) => {
                 <Button color="indigo" onClick={handleAddCart}>
                         <a>Ajouter au panier</a>
                 </Button>
+
+                <PaypalButton value={aItem.aItem.map((e: any) => e.prix)} name={aItem.aItem.map((e: any) => e.nom)} description={aItem.aItem.map((e: any) => e.description)} />
 
             </Box>
         </>
