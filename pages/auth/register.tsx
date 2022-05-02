@@ -46,7 +46,7 @@ export default function Register() {
         <h3>Nom complet</h3>
         <input type="text" placeholder="Nom" onChange={handleNameInput} />
 
-        <h3>Nom d'utilisateur</h3>
+        <h3>Nom d`&apos;utilisateur</h3>
         <input type="text" placeholder="Pseudo" onChange={handleEmailInput} />
 
         <h3>Mot de passe</h3>
