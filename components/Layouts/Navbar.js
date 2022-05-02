@@ -4,16 +4,22 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import { Button } from '@mantine/core';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
+import LOGO from '../../public/images/e-scooter.jpg'
+import shoppingCart from '../../public/images/panier.png'
+import { useSelector } from 'react-redux';
 
 const pages = ['Accueil', 'Produits', 'A Propos' ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -21,6 +27,10 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const { user } = useSelector((store) => store.app)
+
+  const router = useRouter()
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -33,7 +43,17 @@ const Navbar = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (e) => {
+    if(e.target.textContent === 'Dashboard') {
+      router.push('/dashboard')
+    }
+    if(e.target.textContent === "Profile") {
+      router.push('/profil')
+    }
+    if(e.target.textContent === "Account") {
+      router.push('/auth/account')
+    }
+
     setAnchorElUser(null);
   };
 
@@ -87,7 +107,9 @@ const Navbar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
+            <Link href="/">
+              <a><Image src={LOGO} height={40} width={40}></Image></a>
+            </Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -155,24 +177,47 @@ const Navbar = () => {
             </AppBar>
             </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
+            
+              <Button>
+              <Link href="/about">
+                <a>A propos</a>
+              </Link>
               </Button>
-            ))}
+
+              { user ?
+              <Button>
+              <Link href="/favoris">
+                <a>Favoris</a>
+              </Link>
+              </Button>
+               : 
+               ''
+              }
+
+              <Button>
+              <Link href="/auth/connexion">
+                <a>Connexion</a>
+              </Link>
+              </Button>
+
+              <Link href='/sales/cart'>
+                <Image src={shoppingCart} height={50} width={50}></Image>
+              </Link>
+
+            
           </Box>
 
 
           <Box sx={{ flexGrow: 0 }}>
+            { user ?
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Nom Profil" src="" />
               </IconButton>
             </Tooltip>
+            : 
+            ''
+            }
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"

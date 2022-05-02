@@ -19,6 +19,12 @@ const Produit = sequelize.define('Produit', {
     stock: {
         type: DataTypes.INTEGER,
     },
+    image: {
+        type: DataTypes.STRING,
+    },
+    price_id : {
+        type: DataTypes.STRING,
+    },
     ref_categorie: {
         type: DataTypes.INTEGER,
     },
@@ -27,5 +33,9 @@ const Produit = sequelize.define('Produit', {
         timestamps: false,
     }
 );
+
+//sequelize.sync({alter: true}).then(
+//    () => console.log('Sync of Product completed')
+//);
 
 export default Produit;
