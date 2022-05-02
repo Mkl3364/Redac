@@ -6,12 +6,13 @@ import { useRouter } from "next/router";
 import { Button } from "@mantine/core";
 import { useDispatch } from "react-redux";
 import { setUser } from "../state/AppSlice";
-
+import { server } from "../config";
 
 function Profil() {
 
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
+  const [orderID, setOrderId] = useState('')
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -25,8 +26,38 @@ function Profil() {
       console.error(err);
     }
   };
+
+  const fetchOrders = async () => {
+    try {
+      const q = query(collection(db, 'transactions'), where('user_id', '==', user?.uid))
+      const querySnapshot = await getDocs(q)
+      querySnapshot.forEach(async (doc) => {
+        console.log(doc.id, "=>", doc.data().order_id)
+        setOrderId(doc.data().order_id)
+      })
+      console.log('le order id', orderID)
+      const detail = await fetch(`https://api-m.sandbox.paypal.com/v2/checkout/orders/${orderID}`, {
+        method: 'get',
+        headers : {
+          "Content-Type" : 'application/json',
+          Authorization: `Bearer A21AAKiFeP4gZUHS1Msze4JkRBLzbv_G7lmkeqblUO6xbMqGqaOvaQZH_DjSIbCiwRDlGJR-rBJ-Ca6JfCyT-8QKfGlFZr1og`
+        }
+      })
+      const data = detail.json();
+      console.log(data)
+      
+    }
+    catch(err) {
+      console.error(err)
+    }
+  }
+
+
+
+
   useEffect(() => {
     fetchUserName();
+    fetchOrders()
   }, [user, loading]);
 
   const handleLogOut = () => {

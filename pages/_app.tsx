@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Layout from '../components/Layouts/Layout';
 import { Provider } from 'react-redux';
 import store from '../state/store';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -11,6 +12,7 @@ export default function App(props: AppProps) {
   return (
     <>
     <Provider store={store}>
+      <PayPalScriptProvider options={{"client-id" : 'AU49Mxm3FeSnVsrORkkEVovHFLdx6o7UgpXBY7coH74RyXIlrMBJ8g6QCJsP-YnhJ4rjEU4idKWeL5WJ', components: 'buttons', currency: 'EUR'}}>
       <Header titre='Site e-commerce' />
       <Layout>
       <MantineProvider
@@ -31,6 +33,7 @@ export default function App(props: AppProps) {
         <Component {...pageProps} />
       </MantineProvider>
       </Layout>
+      </PayPalScriptProvider>
       </Provider>
     </>
   );
