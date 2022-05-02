@@ -150,7 +150,7 @@ const Dashboard = (props: any) => {
             </section>
 
             <section>
-                <h2>Ajout d'un produit</h2>
+                <h2>Ajout d`&apos;un produit</h2>
             
                     <div >
                         <label >Enter your name: </label>
@@ -185,7 +185,7 @@ const Dashboard = (props: any) => {
 
                     <select name="produits" onClick={(e:any) => handleProductID(e)}>
                         {item.result.map((e: any) => 
-                            <option value={e.id_produit}> {e.id_produit} - {e.nom}</option>
+                            <option key={e.id_produit}  value={e.id_produit}> {e.id_produit} - {e.nom}</option>
                         )}
                     </select>
                         <div >
@@ -221,7 +221,7 @@ const Dashboard = (props: any) => {
                         
                     <select name="delete_produits" onClick={(e:any) => handleProductID(e)}>
                         {item.result.map((e: any) => 
-                            <option value={e.id_produit}> {e.id_produit} - {e.nom}</option>
+                            <option key={e.id_produit} value={e.id_produit}> {e.id_produit} - {e.nom}</option>
                         )}
                     </select>
                         <div >

@@ -8,7 +8,7 @@ const cancel = () => {
         <div>
             <Header titre='Payment failed'/>
             <h1>Opération annulée</h1>
-            <Link href='/'><Button color='cyan' >Revenir à l'accueil</Button></Link>
+            <Link href='/'><Button color='cyan' >Revenir à l`&apos;accueil</Button></Link>
         </div>
     );
 };

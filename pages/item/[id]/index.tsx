@@ -85,7 +85,7 @@ const Index = ({ aItem }: any) => {
             ? 
 
                 <Notification icon={<Check size={18} />} color="teal" title="Notification">
-                L'article {aItem.aItem.map((e: any) => e.nom)} a été ajouté au panier
+                L`&apos;article {aItem.aItem.map((e: any) => e.nom)} a été ajouté au panier
                 </Notification>
             
             :

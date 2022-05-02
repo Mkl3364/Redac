@@ -61,7 +61,7 @@ const Cart = () => {
 
             :
 
-            <h2>Il n'y a rien dans le panier</h2>
+            <h2>Il n`&apos;y a rien dans le panier</h2>
         }
         </div>
     );

@@ -38,7 +38,7 @@ const Reset = () => {
           Send password reset email
         </Button>
         <div>
-          Don't have an account? <Link href="/auth/register">Register</Link> now.
+          Don`&apos;t have an account? <Link href="/auth/register">Register</Link> now.
         </div>
       </div>
     </div>
