@@ -85,7 +85,7 @@ const Index = ({ aItem }: any) => {
             ? 
 
                 <Notification icon={<Check size={18} />} color="teal" title="Notification">
-                L`&apos;article {aItem.aItem.map((e: any) => e.nom)} a été ajouté au panier
+                L article {aItem.aItem.map((e: any) => e.nom)} a été ajouté au panier
                 </Notification>
             
             :
@@ -144,36 +144,36 @@ const Index = ({ aItem }: any) => {
     );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-    const id = context.params;
-    //console.log('ID params ', id)
-    if (id === undefined) {
-        throw new Error('ID inconnu')
-    }
-    const res = await fetch(`${server}/api/item/${id.id}`)
+    export const getStaticProps: GetStaticProps = async (context) => {
+        const id = context.params;
+        //console.log('ID params ', id)
+        if (id === undefined) {
+            throw new Error('ID inconnu')
+        }
+        const res = await fetch(`${server}/api/item/${id.id}`)
 
-    const aItem = await res.json()
+        const aItem = await res.json()
 
-    return {
-        props: {
-            aItem
+        return {
+            props: {
+                aItem
+            }
         }
     }
-}
 
-export const getStaticPaths = async () => {
-    const res = await fetch(`${server}/api/item`)
+    export const getStaticPaths = async () => {
+        const res = await fetch(`${server}/api/item`)
 
-    const items = await res.json();
-    //console.log('item', items)
-    const ids = items.result.map((item: any) => item.id_produit)
-    console.log(ids)
-    const paths = ids.map((id: any) => ({ params: { id: id.toString() } }))
+        const items = await res.json();
+        //console.log('item', items)
+        const ids = items.result.map((item: any) => item.id_produit)
+        console.log(ids)
+        const paths = ids.map((id: any) => ({ params: { id: id.toString() } }))
 
-    return {
-        paths,
-        fallback: false
+        return {
+            paths,
+            fallback: false
+        }
     }
-}
 
 export default Index;
