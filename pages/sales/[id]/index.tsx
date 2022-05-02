@@ -40,7 +40,7 @@ const Index = ({ aItem }: any) => {
 
     //const price = Number(aItem[0].prix)
 
-    await fetch('/api/stripe/checkout_session', {
+    await fetch(`${server}/api/stripe/checkout_session`, {
       method: "POST",
      
       body: JSON.stringify({

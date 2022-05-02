@@ -56,7 +56,7 @@ const Index = ({ aItem }: any) => {
     }
 
     const handleCreateOrder = async() => {
-        const response = await fetch('/api/paypal/createOrder', {
+        const response = await fetch(`${server}/api/paypal/createOrder`, {
             method: 'POST',
         });
         //console.log(response)
@@ -69,7 +69,7 @@ const Index = ({ aItem }: any) => {
     const handleCapturePayment = async() => {
         const id = await handleCreateOrder()
         console.log(id)
-        const response = await fetch(`/api/paypal/capture/${id}`, {
+        const response = await fetch(`${server}/api/paypal/capture/${id}`, {
             method: 'POST',
         })
         const data = await response.json()
