@@ -5,6 +5,8 @@ import Layout from '../components/Layouts/Layout';
 import { Provider } from 'react-redux';
 import store from '../state/store';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import sequelize from '../db/database';
+import Produit from '../db/models/Produit';
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -37,4 +39,18 @@ export default function App(props: AppProps) {
       </Provider>
     </>
   );
+}
+
+export const getStaticProps = async () => {
+
+  sequelize.authenticate().then(
+      () => console.log('Connexion OK')
+  )
+  await Produit.sync({alter: true}).then(
+      () => console.log('Produit synchronized')
+  )
+
+  return {
+      props: {}
+  }
 }
