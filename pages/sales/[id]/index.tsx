@@ -98,19 +98,19 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
 }
 
-export const getStaticPaths = async () => {
-  const res = await fetch(`${server}/api/item`)
-
-  const items = await res.json();
-  //console.log('item', items)
-  const ids = items.result.map((item: any) => item.id_produit)
-  console.log(ids)
-  const paths = ids.map((id: any) => ({ params: { id: id.toString() } }))
-
-  return {
-    paths,
-    fallback: false
-  }
-}
+//export const getStaticPaths = async () => {
+//  const res = await fetch(`${server}/api/item`)
+//
+//  const items = await res.json();
+//  //console.log('item', items)
+//  const ids = items.result.map((item: any) => item.id_produit)
+//  console.log(ids)
+//  const paths = ids.map((id: any) => ({ params: { id: id.toString() } }))
+//
+//  return {
+//    paths,
+//    fallback: false
+//  }
+//}
 
 export default Index;
