@@ -126,12 +126,6 @@ const Index = ({ aItem }: any) => {
                     <a>Editer</a>
                     </Link>
                 </Button>
-                <Button color="indigo">
-                    <Link 
-                    href={`/sales/${aItem.aItem.map((e: any) => e.id_produit)}`}>
-                        <a>Acheter</a>
-                    </Link>
-                </Button>
 
                 <Button color="indigo" onClick={handleAddCart}>
                         <a>Ajouter au panier</a>
