@@ -1,6 +1,5 @@
 import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
-import { BaseUrl, data, uploadImage } from "../../../base/BaseApi";
 
 //var FormData = require('form-data')
 //var dataToSend = new FormData()
