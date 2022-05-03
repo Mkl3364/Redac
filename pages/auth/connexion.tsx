@@ -19,7 +19,7 @@ const PageConnexion = () => {
   useEffect(() => {
     if(user) {
       dispatch(setUser(true))
-      router.push('/');
+      //router.push("/");
     }
   }, [user, loading])
 
@@ -39,7 +39,7 @@ const PageConnexion = () => {
         <form className="form">
             <h1>Connexion</h1>
 
-            <h3>Nom d'utilisateur</h3>
+            <h3>Nom d`&apos;utilisateur</h3>
             <input type="text" placeholder="Pseudo" onChange={handleEmailInput} />
 
             <h3>Mot de passe</h3>
@@ -79,9 +79,8 @@ const PageConnexion = () => {
           <div>
             <Link href="/auth/reset">Mot de passe oublié ?</Link>
           </div>
-
           <div>
-            Pas encore de compte ? <Link href="/register">S'enregistrer</Link>
+            Pas encore de compte ? <Link href="/register">S`&apos;enregistrer</Link>
           </div>
           </form>
     );

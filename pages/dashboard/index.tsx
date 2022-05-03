@@ -54,7 +54,7 @@ const Dashboard = (props: any) => {
 
         const convertedBase64Image = await convertImageToBase64(e.target.files![0])
 
-        const response = await fetch('/api/imgur/upload', {
+        const response = await fetch(`${server}/api/imgur/upload`, {
             method: "POST",
             body: JSON.stringify({
                 image: convertedBase64Image
@@ -66,7 +66,7 @@ const Dashboard = (props: any) => {
         console.log(link.data.link)
 
 
-        const result = await fetch('/api/stripe/create_price', {
+        const result = await fetch(`${server}/api/stripe/create_price`, {
             method: "POST",
             body: JSON.stringify({
                 name: productName,
@@ -88,7 +88,7 @@ const Dashboard = (props: any) => {
 
     const submitCreateForm = async () => {
 
-        await fetch('/api/item/create', {
+        await fetch(`${server}/api/item/create`, {
             method: "POST",
             body: JSON.stringify({
                 name: productName,
@@ -103,7 +103,7 @@ const Dashboard = (props: any) => {
     }
 
     const submitModifyForm = async() => {
-        await fetch('/api/item/update', {
+        await fetch(`${server}/api/item/update`, {
             method: "PUT",
             body: JSON.stringify({
                 name: productName,
@@ -118,7 +118,7 @@ const Dashboard = (props: any) => {
     }
 
     const submitDeleteForm = async() => {
-        await fetch('/api/item/delete' , {
+        await fetch(`${server}/api/item/delete` , {
             method: "DELETE",
             body: JSON.stringify({
                 id: currentID
@@ -150,7 +150,7 @@ const Dashboard = (props: any) => {
             </section>
 
             <section>
-                <h2>Ajout d'un produit</h2>
+                <h2>Ajout d`&apos;un produit</h2>
             
                     <div >
                         <label >Enter your name: </label>
@@ -185,7 +185,7 @@ const Dashboard = (props: any) => {
 
                     <select name="produits" onClick={(e:any) => handleProductID(e)}>
                         {item.result.map((e: any) => 
-                            <option value={e.id_produit}> {e.id_produit} - {e.nom}</option>
+                            <option key={e.id_produit}  value={e.id_produit}> {e.id_produit} - {e.nom}</option>
                         )}
                     </select>
                         <div >
@@ -221,7 +221,7 @@ const Dashboard = (props: any) => {
                         
                     <select name="delete_produits" onClick={(e:any) => handleProductID(e)}>
                         {item.result.map((e: any) => 
-                            <option value={e.id_produit}> {e.id_produit} - {e.nom}</option>
+                            <option key={e.id_produit} value={e.id_produit}> {e.id_produit} - {e.nom}</option>
                         )}
                     </select>
                         <div >

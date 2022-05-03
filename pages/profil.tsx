@@ -36,15 +36,6 @@ function Profil() {
         setOrderId(doc.data().order_id)
       })
       console.log('le order id', orderID)
-      const detail = await fetch(`https://api-m.sandbox.paypal.com/v2/checkout/orders/${orderID}`, {
-        method: 'get',
-        headers : {
-          "Content-Type" : 'application/json',
-          Authorization: `Bearer A21AAKiFeP4gZUHS1Msze4JkRBLzbv_G7lmkeqblUO6xbMqGqaOvaQZH_DjSIbCiwRDlGJR-rBJ-Ca6JfCyT-8QKfGlFZr1og`
-        }
-      })
-      const data = detail.json();
-      console.log(data)
       
     }
     catch(err) {
