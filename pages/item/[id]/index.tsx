@@ -166,7 +166,6 @@ const Index = ({ aItem }: any) => {
 
         return {
             paths,
-            fallback: false
         }
     }
 
